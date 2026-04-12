@@ -1,0 +1,29 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "parcel index.html"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "frontend",
+    "byethrow"
+  ],
+  "author": "Naveen",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@praha/byethrow": "^0.10.1",
+    "axios": "^1.15.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "buffer": "^6.0.3",
+    "parcel": "^2.16.4"
+  }
+}
