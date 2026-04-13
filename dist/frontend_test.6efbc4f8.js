@@ -17408,72 +17408,17 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _httpClient = require("./packages/http/httpClient");
-var _httpClientDefault = parcelHelpers.interopDefault(_httpClient);
-var _s = $RefreshSig$();
-const fetchInstance = (0, _httpClientDefault.default)("fetch");
+var _users = require("./components/users");
+var _usersDefault = parcelHelpers.interopDefault(_users);
 function App() {
-    _s();
-    const [users, setUsers] = (0, _react.useState)(null);
-    const [isLoading, setLoading] = (0, _react.useState)(false);
-    (0, _react.useEffect)(()=>{
-        (async ()=>{
-            setLoading(true);
-            const usersData = await fetchInstance.get("https://jsonplaceholder.typicode.com/users");
-            setUsers(usersData);
-            setLoading(false);
-        })();
-    }, []);
-    if (isLoading) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: "Loading users..."
-    }, void 0, false, {
-        fileName: "src/app.tsx",
-        lineNumber: 16,
-        columnNumber: 16
-    }, this);
-    if (!users || users.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: "No users found"
-    }, void 0, false, {
-        fileName: "src/app.tsx",
-        lineNumber: 20,
-        columnNumber: 16
-    }, this);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-        children: users.map((user)=>{
-            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: user.name
-                    }, void 0, false, {
-                        fileName: "src/app.tsx",
-                        lineNumber: 27,
-                        columnNumber: 25
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: user.email
-                    }, void 0, false, {
-                        fileName: "src/app.tsx",
-                        lineNumber: 28,
-                        columnNumber: 25
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: user.phone
-                    }, void 0, false, {
-                        fileName: "src/app.tsx",
-                        lineNumber: 29,
-                        columnNumber: 25
-                    }, this)
-                ]
-            }, user.id, true, {
-                fileName: "src/app.tsx",
-                lineNumber: 26,
-                columnNumber: 28
-            }, this);
-        })
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _usersDefault.default), {}, void 0, false, {
+            fileName: "src/app.tsx",
+            lineNumber: 7,
+            columnNumber: 13
+        }, this)
     }, void 0, false);
 }
-_s(App, "ap5pYC7NzQ5BN6b3hZgK/s9xvdw=");
 _c = App;
 exports.default = App;
 var _c;
@@ -17484,7 +17429,7 @@ $RefreshReg$(_c, "App");
   globalThis.$RefreshReg$ = prevRefreshReg;
   globalThis.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"dVPUn","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","react":"jMk1U","./packages/http/httpClient":"bWHZ5"}],"jnFvT":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"dVPUn","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi","./components/users":"915Lp"}],"jnFvT":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -19792,7 +19737,183 @@ function $da9882e673ac146b$var$ErrorOverlay() {
     return null;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"bWHZ5":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"915Lp":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$d5c7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+$parcel$ReactRefreshHelpers$d5c7.init();
+var prevRefreshReg = globalThis.$RefreshReg$;
+var prevRefreshSig = globalThis.$RefreshSig$;
+$parcel$ReactRefreshHelpers$d5c7.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _userServices = require("../services/userServices");
+var _userServicesDefault = parcelHelpers.interopDefault(_userServices);
+var _s = $RefreshSig$();
+const userService = new (0, _userServicesDefault.default)();
+function UsersList() {
+    _s();
+    const [users, setUsers] = (0, _react.useState)(null);
+    const [userTodos, setUserTodos] = (0, _react.useState)(null);
+    async function getUserTodosById(userId) {
+        const userTodos = await userService.getUserTodos(userId);
+        setUserTodos(userTodos);
+    }
+    (0, _react.useEffect)(()=>{
+        (async ()=>{
+            const usersData = await userService.getUsers();
+            setUsers(usersData);
+        })();
+    }, []);
+    if (!users) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: "No users"
+    }, void 0, false, {
+        fileName: "src/components/users.tsx",
+        lineNumber: 22,
+        columnNumber: 16
+    }, this);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            users && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        children: "Users"
+                    }, void 0, false, {
+                        fileName: "src/components/users.tsx",
+                        lineNumber: 29,
+                        columnNumber: 25
+                    }, this),
+                    "  ",
+                    users.map((user)=>{
+                        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            style: {
+                                border: "1px solid black",
+                                cursor: "pointer"
+                            },
+                            onClick: async ()=>{
+                                await getUserTodosById(user.id);
+                            },
+                            children: [
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                        children: user.name
+                                    }, void 0, false, {
+                                        fileName: "src/components/users.tsx",
+                                        lineNumber: 37,
+                                        columnNumber: 43
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "src/components/users.tsx",
+                                    lineNumber: 37,
+                                    columnNumber: 37
+                                }, this),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                        children: user.email
+                                    }, void 0, false, {
+                                        fileName: "src/components/users.tsx",
+                                        lineNumber: 38,
+                                        columnNumber: 43
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "src/components/users.tsx",
+                                    lineNumber: 38,
+                                    columnNumber: 37
+                                }, this),
+                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                        children: user.phone
+                                    }, void 0, false, {
+                                        fileName: "src/components/users.tsx",
+                                        lineNumber: 39,
+                                        columnNumber: 43
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "src/components/users.tsx",
+                                    lineNumber: 39,
+                                    columnNumber: 37
+                                }, this)
+                            ]
+                        }, user.id, true, {
+                            fileName: "src/components/users.tsx",
+                            lineNumber: 31,
+                            columnNumber: 40
+                        }, this);
+                    })
+                ]
+            }, void 0, true),
+            userTodos && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                        children: "User todos"
+                    }, void 0, false, {
+                        fileName: "src/components/users.tsx",
+                        lineNumber: 48,
+                        columnNumber: 25
+                    }, this),
+                    " ",
+                    userTodos.map((todo)=>{
+                        return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("strong", {
+                                    children: todo.title
+                                }, void 0, false, {
+                                    fileName: "src/components/users.tsx",
+                                    lineNumber: 51,
+                                    columnNumber: 43
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/components/users.tsx",
+                                lineNumber: 51,
+                                columnNumber: 37
+                            }, this)
+                        }, todo.id, false, {
+                            fileName: "src/components/users.tsx",
+                            lineNumber: 50,
+                            columnNumber: 40
+                        }, this);
+                    })
+                ]
+            }, void 0, true)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/users.tsx",
+        lineNumber: 25,
+        columnNumber: 9
+    }, this);
+}
+_s(UsersList, "Haj8eV7ccnRjMqvfR50HgWfQZCU=");
+_c = UsersList;
+exports.default = UsersList;
+var _c;
+$RefreshReg$(_c, "UsersList");
+
+  $parcel$ReactRefreshHelpers$d5c7.postlude(module);
+} finally {
+  globalThis.$RefreshReg$ = prevRefreshReg;
+  globalThis.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"dVPUn","react":"jMk1U","../services/userServices":"dRCIK","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"7h6Pi"}],"dRCIK":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _httpClient = require("../packages/http/httpClient");
+var _httpClientDefault = parcelHelpers.interopDefault(_httpClient);
+const $fetch = (0, _httpClientDefault.default)("fetch");
+class UserServiceProvider {
+    async getUsers() {
+        const users = await $fetch.get("https://jsonplaceholder.typicode.com/users");
+        return users;
+    }
+    async getUserTodos(userId) {
+        const userTodos = await $fetch.get(`https://jsonplaceholder.typicode.com/users/${userId}/todos`);
+        return userTodos;
+    }
+}
+exports.default = UserServiceProvider;
+
+},{"../packages/http/httpClient":"bWHZ5","@parcel/transformer-js/src/esmodule-helpers.js":"jnFvT"}],"bWHZ5":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _axiosClient = require("./axiosClient");
@@ -25429,7 +25550,7 @@ var _byethrow = require("@praha/byethrow");
 function fetchData(url, method, data, queryParameters, customHeaders) {
     return (0, _byethrow.Result).try({
         async try () {
-            if (queryParameters) {
+            if (queryParameters && Object.keys(queryParameters).length > 0) {
                 const params = new URLSearchParams(queryParameters);
                 url += `?${params.toString()}`;
             }

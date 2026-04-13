@@ -3,7 +3,7 @@ import { HttpMethod } from './types';
 function fetchData<T>(url: string, method: HttpMethod, data: unknown, queryParameters: Record<string, string>, customHeaders: Record<string, string>) {
     return Result.try({
         async try() {
-            if (queryParameters) {
+            if (queryParameters && Object.keys(queryParameters).length > 0 ) {
                 const params = new URLSearchParams(queryParameters);
                 url += `?${params.toString()}`;
             }
