@@ -27,3 +27,9 @@ interface Geo {
     lat: string;
     lng: string;
 }
+
+export interface NewUser {
+    name : string,
+    email : string,
+    password : string
+}

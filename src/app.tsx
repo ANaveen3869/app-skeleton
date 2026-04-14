@@ -1,7 +1,6 @@
-import UsersList from "./components/users";
+import UsersList from "./components/users/usersList";
 
 function App() {
-
     return (
         <>
             <UsersList />
