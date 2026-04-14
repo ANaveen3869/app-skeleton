@@ -35,12 +35,12 @@ function fetchData<T>(url: string, method: HttpMethod, data: unknown, queryParam
 
 
 class FetchClient {
-    private async request<T>(url: string, method: HttpMethod, data: unknown, queryParameters: Record<string, string>, customHeaders: Record<string, string>): Promise<T | null> {
+    private async request<T>(url: string, method: HttpMethod, data: unknown, queryParameters: Record<string, string>, customHeaders: Record<string, string>) {
         const result = await fetchData<T>(url, method, data, queryParameters, customHeaders);
         if (Result.isFailure(result)) {
             throw result.error;
         }
-        return result.value as T | null;
+        return result.value;
     }
     async get<T>(url: string, queryParameters: Record<string, string> = {}, customHeaders: Record<string, string> = {}) {
         return this.request<T>(url, "GET", undefined, queryParameters, customHeaders)
